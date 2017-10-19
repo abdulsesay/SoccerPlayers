@@ -1,0 +1,50 @@
+  CREATE TABLE Players (
+  id INT,
+  FirstName VARCHAR(200),
+  LastNAme VARCHAR(200),
+  State VARCHAR(100),
+  PhoneNumber INT(10),
+  Team VARCHAR(100)
+  );
+  
+CREATE TABLE Other (
+    id INT,
+    Salary INT,
+    Country VARCHAR(200),
+    Foot VARCHAR(100)
+    );
+  
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (19, "James", "Beattie", "Texas", "Southampton");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (7, "Christiano", "Ronaldo", "California", "Madrid");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (8, "Paul", "Pogba", "New York", "Man UTD");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (29, "Kyliann", "MBappe", "Kansas", "Paris");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (99, "Ronaldinho", "Gaucho", "New Hampshire", "Barcelona");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (10, "Lionel", "Messi", "North Carolina", "Barcelona");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (24, "Young", "Neymar", "New Mexico", "Paris");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (9, "Paulo", "Dybala", "Georgia", "Juventus");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (27, "Oxlade", "Chamberlain", "New Jersey", "Liverpool");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (16, "Joe", "Allen", "Iowa", "Stoke");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (18, "Ross", "Barkley", "Maine", "Everton");
+  INSERT INTO Players (id, FirstName, LastName, State, Team) VALUES (20, "Troy", "Deeny", "Georgia", "Watford");
+  
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (750000, "England", "Left", 19);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (20550000, "Portugal", "Right", 7);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (17500000, "France", "Right", 8);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (1200000, "France", "Right", 29);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (1550000, "Brazil", "Right", 99);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (19350000, "Argentina", "Left", 10);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (23000000, "Brazil", "Right", 24);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (1400000, "England", "Right", 27);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (740000, "Wales", "Right", 16);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (7400000, "Argentina", "Left", 9);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (2000000, "England", "Right", 18);
+  INSERT INTO Other (Salary, Country, Foot, id) VALUES (500000, "England", "Right", 20);
+
+SELECT FirstName, LastName, Team, Foot FROM Players, Other ON (Players.id = Other.id) WHERE Foot = "Right";
+
+SELECT p.FirstName, p.LastName, p.Team, o.Salary, o.Country FROM Players AS p JOIN Other AS o ON (p.id = o.id) WHERE Salary IN (SELECT Max(Salary) FROM Other);
+
+SELECT FirstName, LastName, Team, Salary, Country FROM Players, Other ON (Players.id = Other.id) WHERE Salary IN (SELECT Max(Salary) FROM Other);
+
+/* using || instead of CONCAT, written in SQL lite*/
+SELECT FirstName || " " || LastName AS "NAME" from Players;
